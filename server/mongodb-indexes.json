@@ -1,0 +1,331 @@
+{
+  "schema"      : 1,
+  "collections" : {
+    "messaging_v1_outbox"             : [
+      {
+        "key"    : {
+          "namespace"     : 1,
+          "service"       : 1,
+          "publicationId" : 1
+        },
+        "unique" : true
+      },
+      {
+        "key" : {
+          "namespace"   : 1,
+          "service"     : 1,
+          "status"      : 1,
+          "availableAt" : 1,
+          "leaseUntil"  : 1
+        }
+      },
+      {
+        "key"                : {
+          "expiresAt" : 1
+        },
+        "expireAfterSeconds" : 0
+      }
+    ],
+    "messaging_v1_inbox"              : [
+      {
+        "key"    : {
+          "namespace" : 1,
+          "service"   : 1,
+          "handler"   : 1,
+          "messageId" : 1
+        },
+        "unique" : true
+      },
+      {
+        "key" : {
+          "namespace"  : 1,
+          "service"    : 1,
+          "status"     : 1,
+          "leaseUntil" : 1
+        }
+      },
+      {
+        "key"                : {
+          "expiresAt" : 1
+        },
+        "expireAfterSeconds" : 0
+      }
+    ],
+    "messaging_v1_failures"           : [
+      {
+        "key"    : {
+          "namespace" : 1,
+          "service"   : 1,
+          "failureId" : 1
+        },
+        "unique" : true
+      },
+      {
+        "key" : {
+          "namespace" : 1,
+          "service"   : 1,
+          "status"    : 1,
+          "createdAt" : 1
+        }
+      },
+      {
+        "key"                : {
+          "expiresAt" : 1
+        },
+        "expireAfterSeconds" : 0
+      }
+    ],
+    "messaging_v1_failure_chunks"     : [
+      {
+        "key"    : {
+          "namespace" : 1,
+          "service"   : 1,
+          "failureId" : 1,
+          "index"     : 1
+        },
+        "unique" : true
+      }
+    ],
+    "PLATFORM_CONFIGURATION"          : [
+      {
+        "key" : {
+          "workspace"  : 1,
+          "userCreate" : 1
+        }
+      },
+      {
+        "key" : {
+          "workspace"    : 1,
+          "userAssigned" : 1
+        }
+      }
+    ],
+    "PLATFORM_COUNTER"                : [
+      {
+        "key" : {
+          "workspace"  : 1,
+          "userCreate" : 1
+        }
+      },
+      {
+        "key" : {
+          "workspace"    : 1,
+          "userAssigned" : 1
+        }
+      }
+    ],
+    "PLATFORM_INSTANCE"               : [
+      {
+        "key" : {
+          "workspace"  : 1,
+          "userCreate" : 1
+        }
+      },
+      {
+        "key" : {
+          "workspace"    : 1,
+          "userAssigned" : 1
+        }
+      },
+      {
+        "key" : {
+          "instanceCode" : 1
+        }
+      },
+      {
+        "key" : {
+          "sessionCode" : 1
+        }
+      }
+    ],
+    "PLATFORM_NOTIFICATION_BROADCAST" : [
+      {
+        "key"    : {
+          "broadcastCode" : 1
+        },
+        "unique" : true,
+        "name"   : "notification_broadcast_code"
+      },
+      {
+        "key" : {
+          "state"      : 1,
+          "leaseUntil" : 1
+        }
+      }
+    ],
+    "PLATFORM_NOTIFICATION_RECIPIENT" : [
+      {
+        "key"    : {
+          "broadcastCode" : 1,
+          "userCode"      : 1
+        },
+        "unique" : true,
+        "name"   : "notification_recipient_unique"
+      },
+      {
+        "key" : {
+          "broadcastCode" : 1,
+          "state"         : 1,
+          "availableAt"   : 1
+        }
+      }
+    ],
+    "CONNECT_NOTIFICATIONS"           : [
+      {
+        "key" : {
+          "workspace"  : 1,
+          "userCreate" : 1
+        }
+      },
+      {
+        "key" : {
+          "workspace"    : 1,
+          "userAssigned" : 1
+        }
+      },
+      {
+        "key" : {
+          "userCode" : 1,
+          "type"     : -1
+        }
+      },
+      {
+        "key" : {
+          "notificationCode" : 1,
+          "type"             : -1
+        }
+      },
+      {
+        "key"                     : {
+          "broadcastCode" : 1,
+          "userAssigned"  : 1
+        },
+        "unique"                  : true,
+        "name"                    : "notification_broadcast_recipient",
+        "partialFilterExpression" : {
+          "broadcastCode" : {
+            "$type" : "string"
+          }
+        }
+      },
+      {
+        "key"                     : {
+          "sourceEventKey" : 1,
+          "workspace"      : 1,
+          "userAssigned"   : 1
+        },
+        "unique"                  : true,
+        "name"                    : "notification_source_event_recipient",
+        "partialFilterExpression" : {
+          "sourceEventKey" : {
+            "$type" : "string"
+          }
+        }
+      }
+    ],
+    "PLATFORM_RELEASE"                : [
+      {
+        "key" : {
+          "workspace"  : 1,
+          "userCreate" : 1
+        }
+      },
+      {
+        "key" : {
+          "workspace"    : 1,
+          "userAssigned" : 1
+        }
+      },
+      {
+        "key" : {
+          "releaseCode" : 1
+        }
+      },
+      {
+        "key"                     : {
+          "version" : 1
+        },
+        "name"                    : "release_global_version",
+        "unique"                  : true,
+        "partialFilterExpression" : {
+          "workspace" : "allWorkspaces",
+          "erased"    : false
+        }
+      },
+      {
+        "key"                     : {
+          "state" : 1
+        },
+        "name"                    : "release_global_current",
+        "unique"                  : true,
+        "partialFilterExpression" : {
+          "workspace" : "allWorkspaces",
+          "erased"    : false,
+          "state"     : "1-current"
+        }
+      }
+    ],
+    "PLATFORM_SETTINGS"               : [
+      {
+        "key" : {
+          "workspace"  : 1,
+          "userCreate" : 1
+        }
+      },
+      {
+        "key" : {
+          "workspace"    : 1,
+          "userAssigned" : 1
+        }
+      },
+      {
+        "key" : {
+          "parameter" : 1
+        }
+      }
+    ],
+    "PLATFORM_PUSH_DEVICE"            : [
+      {
+        "key"    : {
+          "fid" : 1
+        },
+        "unique" : true
+      },
+      {
+        "key" : {
+          "workspace" : 1,
+          "userCode"  : 1
+        }
+      },
+      {
+        "key"                : {
+          "expiresAt" : 1
+        },
+        "expireAfterSeconds" : 0
+      }
+    ],
+    "PLATFORM_PUSH_DELIVERY"          : [
+      {
+        "key" : {
+          "state"      : 1,
+          "nextAt"     : 1,
+          "leaseUntil" : 1
+        }
+      },
+      {
+        "key"                : {
+          "expiresAt" : 1
+        },
+        "expireAfterSeconds" : 0
+      }
+    ],
+    "realtime_read_receipts"          : [
+      {
+        "key"                : {
+          "expiresAt" : 1
+        },
+        "expireAfterSeconds" : 0
+      }
+    ]
+  }
+}
